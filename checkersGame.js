@@ -7,7 +7,9 @@ let table;
 let cell;
 let selectedCell;
 let pieceOld = null;
-let turn = WHITE_PLAYER
+let turn = WHITE_PLAYER;
+let lastRow;
+let lastCol;
 
 class BoardData {
     constructor(pieces) {
@@ -26,11 +28,30 @@ class BoardData {
 
     // Set location to the piece(on the click function) and delete the other piece if piece he eat him
     setLocation(row, col, piece) {
-        const isOccupied = this.getPiece(row, col);
-        if (isOccupied) {
-            isOccupied.deletePiece();
-        }
+        let isOccupied;
         piece.MoveLocation(row, col);
+        console.log(lastRow, lastCol)
+        if (pieceOld.piece.player === BLACK_PLAYER) {
+            isOccupied = this.getPiece(lastRow + 1, lastCol + 1);
+            if(isOccupied && row === lastRow + 2 && col === lastCol + 2){
+                isOccupied.deletePiece()
+            }
+            isOccupied = this.getPiece(lastRow + 1, lastCol - 1);
+            if(isOccupied && row === lastRow + 2 && col === lastCol - 2){
+                isOccupied.deletePiece()
+            }
+        }
+        if (pieceOld.piece.player === WHITE_PLAYER) {
+            isOccupied = this.getPiece(lastRow - 1, lastCol + 1);
+            if(isOccupied && row === lastRow - 2 && col === lastCol + 2){
+                isOccupied.deletePiece()
+            }
+            isOccupied = this.getPiece(lastRow - 1, lastCol - 1);
+            if(isOccupied && row === lastRow - 2 && col === lastCol - 2){
+                isOccupied.deletePiece()
+            }
+        }
+       
     }
 
 }
@@ -91,8 +112,9 @@ class Piece {
 
     // Delete piece from the board
     deletePiece() {
-
-        this.pieceBlack.remove();
+        
+        this.pieceWhite.remove()
+        this.pieceBlack.remove()
         this.deleted = true;
         this.row = -1;
         this.col = -1;
@@ -129,7 +151,7 @@ class Piece {
 
         locationOccupied = boardData.getPiece(row + 1, col + 1);
         isOccupied = boardData.getPiece(row + 2, col + 2);
-        if (!locationOccupied && locationOccupied.player !== this.player) {
+        if (!locationOccupied) {
             moves.push([row + 1, col + 1]);
         }
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied) {
@@ -137,12 +159,12 @@ class Piece {
         }
 
         locationOccupied = boardData.getPiece(row + 1, col - 1);
-        isOccupied = boardData.getPiece(row + 2, col + 2);
+        isOccupied = boardData.getPiece(row + 2, col - 2);
         if (!locationOccupied && locationOccupied.player !== this.player) {
             moves.push([row + 1, col - 1]);
         }
 
-        if (locationOccupied && locationOccupied.player !== this.player && !isOccupied) {
+        if (locationOccupied) {
             moves.push([row + 2, col - 2]);
         }
 
@@ -165,7 +187,7 @@ class Piece {
 
         locationOccupied = boardData.getPiece(row - 1, col + 1);
         isOccupied = boardData.getPiece(row - 2, col + 2);
-        if (!locationOccupied && locationOccupied.player !== this.player) {
+        if (!locationOccupied) {
             moves.push([row - 1, col + 1]);
         }
 
@@ -175,7 +197,7 @@ class Piece {
 
         locationOccupied = boardData.getPiece(row - 1, col - 1);
         isOccupied = boardData.getPiece(row - 2, col - 2);
-        if (!locationOccupied && locationOccupied.player !== this.player) {
+        if (!locationOccupied) {
             moves.push([row - 1, col - 1]);
         }
 
@@ -205,7 +227,7 @@ function onCellClick(event, row, col) {
                 turnText.textContent = "black turn";
                 turn = BLACK_PLAYER
             }
-            else{
+            else {
                 turnText.textContent = "white turn";
                 turn = WHITE_PLAYER
             }
@@ -231,9 +253,9 @@ function onCellClick(event, row, col) {
     for (let piece of boardData.pieces) {
         if (piece.row === row && piece.col === col && !piece.deleted) {
             if (piece.player === WHITE_PLAYER && turn === WHITE_PLAYER) {
-                console.log(boardData.turn)
                 pieceOld = new state(piece, selectedCell);
-                console.log(pieceOld)
+                lastRow = pieceOld.piece.row;
+                lastCol = pieceOld.piece.col;
                 let possibleMoves = piece.possibleMoves();
                 for (let possibleMove of possibleMoves) {
                     table.rows[possibleMove[0]].cells[possibleMove[1]].classList.add('possible-move');
@@ -245,9 +267,9 @@ function onCellClick(event, row, col) {
     for (let piece of boardData.pieces) {
         if (piece.row === row && piece.col === col && !piece.deleted) {
             if (piece.player === BLACK_PLAYER && turn === BLACK_PLAYER) {
-                console.log(boardData.turn)
                 pieceOld = new state(piece, selectedCell);
-                console.log(pieceOld)
+                lastRow = pieceOld.piece.row;
+                lastCol = pieceOld.piece.col;
                 let possibleMoves = piece.possibleMoves();
                 for (let possibleMove of possibleMoves) {
                     table.rows[possibleMove[0]].cells[possibleMove[1]].classList.add('possible-move');
