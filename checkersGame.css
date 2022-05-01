@@ -31,5 +31,29 @@
     left:14.5%;
     width: 1700px;
     height: 1200px;
-    background-color: rgba(174, 202, 218 , 0.5);
+    background-color: rgba(168, 175, 179, 0.5);
+}
+
+.pieceBlack{
+    height: 50px;
+    width: 50px;
+    background-color: rgb(87, 39, 39);
+    border-radius: 50%;
+    display: inline-block;
+    top:30%;
+    left:50%;
+    margin-left: 22%;
+    margin-top: 5%;
+}
+
+.pieceWhite{
+    height: 50px;
+    width: 50px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    top:30%;
+    left:50%;
+    margin-left: 22%;
+    margin-top: 5%;
 }
