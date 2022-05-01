@@ -39,6 +39,26 @@ class Piece {
         this.pieceBlack.className = "pieceBlack";
         this.appendPiece();
     }
+
+    // possibleMoves(){
+
+    // }
+}
+
+
+// When you click on some piece
+function onCellClick(event , row ,col){
+// Delete the selected cell when you select another cell
+for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 8; j++) {
+      table.rows[i].cells[j].classList.remove('possible-move');
+      table.rows[i].cells[j].classList.remove('selected');
+    }
+  }
+
+  // background to the selected cell
+  selectedCell = event.currentTarget;
+  selectedCell.classList.add('selected');
 }
 
 
@@ -78,7 +98,7 @@ function createCheckersBoard() {
             } else {
                 cell.className = "square whitesquare";
             }
-
+            cell.addEventListener('click', (event) => onCellClick(event, row, col));
         }
     }
     boardData = new BoardData(piecesOnBoard());

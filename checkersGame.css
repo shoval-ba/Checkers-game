@@ -57,3 +57,11 @@
     margin-left: 22%;
     margin-top: 5%;
 }
+
+.selected{
+    background-color: #539664;
+}
+
+.possible-move{
+    background-color: #514e5294;
+}
