@@ -7,11 +7,11 @@ let table;
 let cell;
 let selectedCell;
 let pieceOld = null;
+let turn = WHITE_PLAYER
 
 class BoardData {
     constructor(pieces) {
         this.pieces = pieces;
-        this.turn = WHITE_PLAYER;
     }
 
     // Returns piece in row, col, or undefined if not exists.
@@ -27,16 +27,10 @@ class BoardData {
     // Set location to the piece(on the click function) and delete the other piece if piece he eat him
     setLocation(row, col, piece) {
         const isOccupied = this.getPiece(row, col);
-        console.log(this.turn)
         if (isOccupied) {
             isOccupied.deletePiece();
         }
         piece.MoveLocation(row, col);
-    }
-
-    // To decide who`s turn
-    nextTurn() {
-        this.turn = this.turn == WHITE_PLAYER ? BLACK_PLAYER : WHITE_PLAYER;
     }
 
 }
@@ -62,6 +56,7 @@ class Piece {
         this.initializePiece();
     }
 
+    // Add the pieces to the cell 
     appendPiece() {
         const cell = table.rows[this.row].cells[this.col];
         if (this.player === WHITE_PLAYER) {
@@ -73,6 +68,7 @@ class Piece {
 
     }
 
+    // Add the pieces
     initializePiece() {
         this.pieceWhite = document.createElement('div');
         this.pieceWhite.className = "pieceWhite";
@@ -81,6 +77,7 @@ class Piece {
         this.appendPiece();
     }
 
+    // Change location of the piece
     changeLocation(row, col) {
         this.row = row;
         this.col = col;
@@ -103,6 +100,7 @@ class Piece {
     }
 
 
+    // possible moves of black and white pieces
     possibleMoves() {
         let filteredMoves = [];
         if (this.player === BLACK_PLAYER) {
@@ -115,10 +113,12 @@ class Piece {
         return filteredMoves
     }
 
+    // If the cell exist on the board
     isExist(row, col) {
         return -1 < row && row < 8 && -1 < col && col < 8
     }
 
+    // Black piece possible moves
     blackMoves() {
         let moves = [];
         let locationOccupied;
@@ -154,6 +154,7 @@ class Piece {
         return moves
     }
 
+    // White piece possible moves
     whiteMoves() {
         let moves = [];
         let locationOccupied;
@@ -200,6 +201,15 @@ function onCellClick(event, row, col) {
     if (pieceOld !== null) {
         let newLocation = event.currentTarget;
         if (newLocation.classList.contains('possible-move')) {
+            if (pieceOld.piece.player === WHITE_PLAYER) {
+                turnText.textContent = "black turn";
+                turn = BLACK_PLAYER
+            }
+            else{
+                turnText.textContent = "white turn";
+                turn = WHITE_PLAYER
+            }
+
             boardData.setLocation(row, col, pieceOld.piece);
         }
         pieceOld = null;
@@ -217,11 +227,11 @@ function onCellClick(event, row, col) {
     selectedCell = event.currentTarget;
     selectedCell.classList.add('selected');
 
-    boardData.nextTurn()
     // Show possible moves to the black player when it`s turn
     for (let piece of boardData.pieces) {
         if (piece.row === row && piece.col === col && !piece.deleted) {
-            if (piece.player === WHITE_PLAYER ) {
+            if (piece.player === WHITE_PLAYER && turn === WHITE_PLAYER) {
+                console.log(boardData.turn)
                 pieceOld = new state(piece, selectedCell);
                 console.log(pieceOld)
                 let possibleMoves = piece.possibleMoves();
@@ -234,7 +244,8 @@ function onCellClick(event, row, col) {
 
     for (let piece of boardData.pieces) {
         if (piece.row === row && piece.col === col && !piece.deleted) {
-            if (piece.player === BLACK_PLAYER) {
+            if (piece.player === BLACK_PLAYER && turn === BLACK_PLAYER) {
+                console.log(boardData.turn)
                 pieceOld = new state(piece, selectedCell);
                 console.log(pieceOld)
                 let possibleMoves = piece.possibleMoves();
