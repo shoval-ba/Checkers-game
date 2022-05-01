@@ -10,51 +10,11 @@ let pieceOld = null;
 let turn = WHITE_PLAYER;
 let lastRow;
 let lastCol;
+let winner;
+let piecesBlack = 0;
+let piecesWhite = 0;
 
-class BoardData {
-    constructor(pieces) {
-        this.pieces = pieces;
-    }
 
-    // Returns piece in row, col, or undefined if not exists.
-    getPiece(row, col) {
-        for (let piece of this.pieces) {
-            if (piece.row === row && piece.col === col) {
-                return piece;
-            }
-        }
-        return false;
-    }
-
-    // Set location to the piece(on the click function) and delete the other piece if piece he eat him
-    setLocation(row, col, piece) {
-        let isOccupied;
-        piece.MoveLocation(row, col);
-        console.log(lastRow, lastCol)
-        if (pieceOld.piece.player === BLACK_PLAYER) {
-            isOccupied = this.getPiece(lastRow + 1, lastCol + 1);
-            if(isOccupied && row === lastRow + 2 && col === lastCol + 2){
-                isOccupied.deletePiece()
-            }
-            isOccupied = this.getPiece(lastRow + 1, lastCol - 1);
-            if(isOccupied && row === lastRow + 2 && col === lastCol - 2){
-                isOccupied.deletePiece()
-            }
-        }
-        if (pieceOld.piece.player === WHITE_PLAYER) {
-            isOccupied = this.getPiece(lastRow - 1, lastCol + 1);
-            if(isOccupied && row === lastRow - 2 && col === lastCol + 2){
-                isOccupied.deletePiece()
-            }
-            isOccupied = this.getPiece(lastRow - 1, lastCol - 1);
-            if(isOccupied && row === lastRow - 2 && col === lastCol - 2){
-                isOccupied.deletePiece()
-            }
-        }
-       
-    }
-
-}
 
 class state {
     constructor(piece, cell) {
@@ -112,15 +72,26 @@ class Piece {
 
     // Delete piece from the board
     deletePiece() {
-        
         this.pieceWhite.remove()
         this.pieceBlack.remove()
         this.deleted = true;
         this.row = -1;
         this.col = -1;
-
     }
 
+    // Check win
+    win() {
+        if (piecesBlack === 12) {
+            winner = WHITE_PLAYER;
+        }
+        else if (piecesWhite === 12) {
+            winner = BLACK_PLAYER;
+        }
+        else {
+            console.log("Unknown");
+        }
+        return winner
+    }
 
     // possible moves of black and white pieces
     possibleMoves() {
@@ -132,7 +103,9 @@ class Piece {
         } else {
             console.log("Unknown type");
         }
+
         return filteredMoves
+
     }
 
     // If the cell exist on the board
@@ -145,34 +118,44 @@ class Piece {
         let moves = [];
         let locationOccupied;
         let isOccupied;
+        let canMove = true;
 
         let col = this.col;
         let row = this.row;
 
         locationOccupied = boardData.getPiece(row + 1, col + 1);
         isOccupied = boardData.getPiece(row + 2, col + 2);
-        if (!locationOccupied) {
-            moves.push([row + 1, col + 1]);
-        }
+
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied) {
             moves.push([row + 2, col + 2]);
+            canMove = false
         }
 
         locationOccupied = boardData.getPiece(row + 1, col - 1);
         isOccupied = boardData.getPiece(row + 2, col - 2);
-        if (!locationOccupied && locationOccupied.player !== this.player) {
-            moves.push([row + 1, col - 1]);
+
+        if (locationOccupied && locationOccupied.player !== this.player && !isOccupied) {
+            moves.push([row + 2, col - 2]);
+            canMove = false
         }
 
-        if (locationOccupied) {
-            moves.push([row + 2, col - 2]);
-        }
+        if (!locationOccupied && canMove === true)
+            moves.push([row + 1, col - 1]);
+
+        locationOccupied = boardData.getPiece(row + 1, col + 1);
+        isOccupied = boardData.getPiece(row + 2, col + 2);
+
+        if (!locationOccupied && canMove === true)
+            moves.push([row + 1, col + 1]);
+
+
 
         moves = moves.filter((move) => {
             if (this.isExist(move[0], move[1])) {
                 return true;
             }
         })
+
         return moves
     }
 
@@ -181,29 +164,35 @@ class Piece {
         let moves = [];
         let locationOccupied;
         let isOccupied;
+        let canMove=true;
 
         let col = this.col;
         let row = this.row;
 
         locationOccupied = boardData.getPiece(row - 1, col + 1);
         isOccupied = boardData.getPiece(row - 2, col + 2);
-        if (!locationOccupied) {
-            moves.push([row - 1, col + 1]);
-        }
 
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied) {
             moves.push([row - 2, col + 2]);
+            canMove = false
         }
 
         locationOccupied = boardData.getPiece(row - 1, col - 1);
         isOccupied = boardData.getPiece(row - 2, col - 2);
-        if (!locationOccupied) {
-            moves.push([row - 1, col - 1]);
-        }
 
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied) {
             moves.push([row - 2, col - 2]);
+            canMove = false
         }
+
+        if (!locationOccupied && canMove === true)
+            moves.push([row - 1, col - 1]);
+
+        locationOccupied = boardData.getPiece(row - 1, col + 1);
+        isOccupied = boardData.getPiece(row - 2, col + 2);
+
+        if (!locationOccupied && canMove === true)
+            moves.push([row - 1, col + 1]);
 
         moves = moves.filter((move) => {
             if (this.isExist(move[0], move[1])) {
@@ -249,6 +238,7 @@ function onCellClick(event, row, col) {
     selectedCell = event.currentTarget;
     selectedCell.classList.add('selected');
 
+
     // Show possible moves to the black player when it`s turn
     for (let piece of boardData.pieces) {
         if (piece.row === row && piece.col === col && !piece.deleted) {
@@ -277,7 +267,6 @@ function onCellClick(event, row, col) {
             }
         }
     }
-
 }
 
 
@@ -336,6 +325,13 @@ function createCheckersBoard() {
             }
             cell.addEventListener('click', (event) => onCellClick(event, row, col));
         }
+
+        winner = document.createElement('div');
+        textNodeWinnerText = document.createTextNode("winner");
+        winner.appendChild(textNodeWinnerText);
+        winner.className = "out";
+        table.appendChild(winner);
+
     }
     boardData = new BoardData(piecesOnBoard());
 }

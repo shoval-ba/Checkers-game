@@ -80,3 +80,17 @@
 .possible-move{
     background-color: #514e5294;
 }
+
+.winner{
+    position: absolute;
+    top:42%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    font-size: 80px;
+}
+
+.out{
+    position: absolute;
+    top:1000%;
+    left:100%;
+}
