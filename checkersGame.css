@@ -81,6 +81,21 @@
     margin-top: 4.5%;
 }
 
+.bar { 
+    top:15px;
+    left:15px;
+    border-radius:50%;
+    border:1px solid white; 
+    border-width:3px;
+    border-top-style:inset;
+    border-right-style:inset;
+    border-top-color: transparent;
+    width:80px; 
+    height:80px;
+    position:absolute; 
+    transform: rotate(40deg);
+}
+
 .selected{
     background-color: rgb(99, 76, 56);
 }

@@ -16,33 +16,87 @@ class BoardData {
     // Set location to the piece(on the click function) and delete the other piece if the piece capture him
     setLocation(row, col, piece) {
         let isOccupied;
+        let isOccupied2;
+        let isOccupied3;
         piece.MoveLocation(row, col);
         if (pieceOld.piece.player === BLACK_PLAYER) {
             isOccupied = this.getPiece(lastRow + 1, lastCol + 1);
+            isOccupied2 = this.getPiece(lastRow + 3, lastCol + 3);
+            isOccupied3 = this.getPiece(lastRow + 3, lastCol + 1);
             if (isOccupied && row === lastRow + 2 && col === lastCol + 2) {
                 isOccupied.deletePiece()
                 deletedWhite += 1;
             }
+            if (isOccupied2 && row === lastRow + 4 && col === lastCol + 4) {
+                isOccupied2.deletePiece();
+                isOccupied.deletePiece();
+                deletedWhite += 2;
+            }
+            if (isOccupied3 && row === lastRow + 4 && col === lastCol) {
+                isOccupied3.deletePiece();
+                isOccupied.deletePiece();
+                deletedWhite += 2;
+            }
+
             isOccupied = this.getPiece(lastRow + 1, lastCol - 1);
+            isOccupied2 = this.getPiece(lastRow + 3, lastCol - 3);
+            isOccupied3 = this.getPiece(lastRow + 3, lastCol - 1);
             if (isOccupied && row === lastRow + 2 && col === lastCol - 2) {
                 isOccupied.deletePiece();
                 deletedWhite += 1;
+            }
+            if (isOccupied2 && row === lastRow + 4 && col === lastCol - 4) {
+                isOccupied.deletePiece()
+                isOccupied2.deletePiece();
+                deletedWhite += 2;
+            }
+            if (isOccupied3 && row === lastRow + 4 && col === lastCol) {
+                isOccupied3.deletePiece();
+                isOccupied.deletePiece();
+                deletedWhite += 2;
             }
 
         }
         if (pieceOld.piece.player === WHITE_PLAYER) {
             isOccupied = this.getPiece(lastRow - 1, lastCol + 1);
+            isOccupied2 = this.getPiece(lastRow - 3, lastCol + 3);
+            isOccupied3 = this.getPiece(lastRow - 3, lastCol + 1);
             if (isOccupied && row === lastRow - 2 && col === lastCol + 2) {
                 isOccupied.deletePiece();
                 deletedBlack += 1;
             }
+            if (isOccupied2 && row === lastRow - 4 && col === lastCol + 4) {
+                isOccupied2.deletePiece();
+                isOccupied.deletePiece();
+                deletedBlack += 2;
+            }
+            if (isOccupied3 && row === lastRow - 4 && col === lastCol) {
+                isOccupied3.deletePiece();
+                isOccupied.deletePiece();
+                deletedBlack += 2;
+            }
+
             isOccupied = this.getPiece(lastRow - 1, lastCol - 1);
+            isOccupied2 = this.getPiece(lastRow - 3, lastCol - 3);
+            isOccupied3 = this.getPiece(lastRow - 3, lastCol - 1);
             if (isOccupied && row === lastRow - 2 && col === lastCol - 2) {
                 isOccupied.deletePiece();
                 deletedBlack += 1;
             }
-
+            if (isOccupied2 && row === lastRow - 4 && col === lastCol - 4) {
+                isOccupied.deletePiece()
+                isOccupied2.deletePiece();
+                deletedBlack += 2;
+            }
+            if (isOccupied3 && row === lastRow - 4 && col === lastCol) {
+                isOccupied3.deletePiece();
+                isOccupied.deletePiece();
+                deletedBlack += 2;
+            }
         }
+        console.log("black" ,deletedBlack)
+        console.log("white" ,deletedWhite)
+
     }
 
     // Check win
@@ -53,19 +107,19 @@ class BoardData {
         for (let piece of boardData.pieces) {
             if (piece.player === turn) {
                 possibleMoves = piece.possibleMoves()
-               if(possibleMoves.length === 0){
-                   if(turn === BLACK_PLAYER){
-                    blackCantMove +=1;
-                   } else if(turn === WHITE_PLAYER){
-                    whiteCantMove +=1;
-                   }
-               }
+                if (possibleMoves.length === 0) {
+                    if (turn === BLACK_PLAYER) {
+                        blackCantMove += 1;
+                    } else if (turn === WHITE_PLAYER) {
+                        whiteCantMove += 1;
+                    }
+                }
             }
         }
-        if (deletedBlack === 3 || blackCantMove === 12 ) {
+        if (deletedBlack === 12 || blackCantMove === 12) {
             winner = WHITE_PLAYER;
         }
-        else if (deletedWhite === 3 || whiteCantMove ===12) {
+        else if (deletedWhite === 12 || whiteCantMove === 12) {
             winner = BLACK_PLAYER;
         }
         return winner

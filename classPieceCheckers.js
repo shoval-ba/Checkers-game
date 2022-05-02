@@ -23,14 +23,15 @@ class Piece {
 
     // Add the pieces to the cell 
     appendPiece() {
+
         const cell = table.rows[this.row].cells[this.col];
         if (this.player === WHITE_PLAYER) {
             cell.appendChild(this.pieceWhite);
+
         }
         if (this.player === BLACK_PLAYER) {
             cell.appendChild(this.pieceBlack);
         }
-
     }
 
     // Add the pieces
@@ -96,6 +97,10 @@ class Piece {
         let moves = [];
         let locationOccupied;
         let isOccupied;
+        let locationOccupied2;
+        let isOccupied2;
+        let locationOccupied3;
+        let isOccupied3;
         let canMove = true;
 
         let col = this.col;
@@ -104,28 +109,50 @@ class Piece {
         locationOccupied = boardData.getPiece(row + 1, col + 1);
         isOccupied = boardData.getPiece(row + 2, col + 2);
 
+        locationOccupied2 = boardData.getPiece(row + 3, col + 3);
+        isOccupied2 = boardData.getPiece(row + 4, col + 4);
+
+        locationOccupied3 = boardData.getPiece(row + 3, col + 1);
+        isOccupied3 = boardData.getPiece(row + 4, col);
+
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row + 2, col + 2)) {
             moves.push([row + 2, col + 2]);
             canMove = false
+            if (locationOccupied2 && locationOccupied2.player !== this.player && !isOccupied2 && this.isExist(row + 4, col + 4)) {
+                moves.push([row + 4, col + 4]);
+            }
+            if (locationOccupied3 && locationOccupied3.player !== this.player && !isOccupied3 && this.isExist(row + 4, col)) {
+                moves.push([row + 4, col]);
+            }
         }
+
+        if (!locationOccupied && canMove === true) {
+            moves.push([row + 1, col + 1]);
+        }
+
 
         locationOccupied = boardData.getPiece(row + 1, col - 1);
         isOccupied = boardData.getPiece(row + 2, col - 2);
 
+        locationOccupied2 = boardData.getPiece(row + 3, col - 3);
+        isOccupied2 = boardData.getPiece(row + 4, col - 4);
+
+        locationOccupied3 = boardData.getPiece(row + 3, col - 1);
+        isOccupied3 = boardData.getPiece(row + 4, col);
+
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row + 2, col - 2)) {
             moves.push([row + 2, col - 2]);
             canMove = false
+            if (locationOccupied2 && locationOccupied2.player !== this.player && !isOccupied2 && this.isExist(row + 4, col - 4)) {
+                moves.push([row + 4, col - 4]);
+            }
+            if (locationOccupied3 && locationOccupied3.player !== this.player && !isOccupied3 && this.isExist(row + 4, col)) {
+                moves.push([row + 4, col]);
+            }
         }
 
         if (!locationOccupied && canMove === true)
             moves.push([row + 1, col - 1]);
-
-        locationOccupied = boardData.getPiece(row + 1, col + 1);
-        isOccupied = boardData.getPiece(row + 2, col + 2);
-
-        if (!locationOccupied && canMove === true)
-            moves.push([row + 1, col + 1]);
-
 
 
         moves = moves.filter((move) => {
@@ -142,6 +169,10 @@ class Piece {
         let moves = [];
         let locationOccupied;
         let isOccupied;
+        let locationOccupied2;
+        let isOccupied2;
+        let locationOccupied3;
+        let isOccupied3;
         let canMove = true;
 
         let col = this.col;
@@ -150,17 +181,46 @@ class Piece {
         locationOccupied = boardData.getPiece(row - 1, col + 1);
         isOccupied = boardData.getPiece(row - 2, col + 2);
 
+        locationOccupied2 = boardData.getPiece(row - 3, col + 3);
+        isOccupied2 = boardData.getPiece(row - 4, col + 4);
+
+        locationOccupied3 = boardData.getPiece(row - 3, col + 1);
+        isOccupied3 = boardData.getPiece(row - 4, col);
+
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row - 2, col + 2)) {
             moves.push([row - 2, col + 2]);
             canMove = false
+            if (locationOccupied2 && locationOccupied2.player !== this.player && !isOccupied2 && this.isExist(row - 4, col + 4)) {
+                moves.push([row - 4, col + 4]);
+            }
+            if (locationOccupied3 && locationOccupied3.player !== this.player && !isOccupied3 && this.isExist(row - 4, col)) {
+                moves.push([row - 4, col]);
+            }
+
+        }
+
+        if (!locationOccupied && canMove === true) {
+            moves.push([row - 1, col + 1]);
         }
 
         locationOccupied = boardData.getPiece(row - 1, col - 1);
         isOccupied = boardData.getPiece(row - 2, col - 2);
 
+        locationOccupied2 = boardData.getPiece(row - 3, col - 3);
+        isOccupied2 = boardData.getPiece(row - 4, col - 4);
+
+        locationOccupied3 = boardData.getPiece(row - 3, col - 1);
+        isOccupied3 = boardData.getPiece(row - 4, col);
+
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row - 2, col - 2)) {
             moves.push([row - 2, col - 2]);
             canMove = false
+            if (locationOccupied2 && locationOccupied2.player !== this.player && !isOccupied2 && this.isExist(row - 4, col - 4)) {
+                moves.push([row - 4, col - 4]);
+            }
+            if (locationOccupied3 && locationOccupied3.player !== this.player && !isOccupied3 && this.isExist(row - 4, col)) {
+                moves.push([row - 4, col]);
+            }
         }
 
         if (!locationOccupied && canMove === true)
@@ -168,9 +228,6 @@ class Piece {
 
         locationOccupied = boardData.getPiece(row - 1, col + 1);
         isOccupied = boardData.getPiece(row - 2, col + 2);
-
-        if (!locationOccupied && canMove === true)
-            moves.push([row - 1, col + 1]);
 
         moves = moves.filter((move) => {
             if (this.isExist(move[0], move[1])) {
@@ -182,13 +239,13 @@ class Piece {
 
     // If piece get to end
     getToEnd() {
-        if (this.player === WHITE_PLAYER && this.row === 2) {
+        if (this.player === WHITE_PLAYER && this.row === 0) {
             console.log("king")
-            this.addIcon()
+
         }
         if (this.player === BLACK_PLAYER && this.row === 7) {
             console.log("king")
-            this.addIcon()
+
         }
     }
 
