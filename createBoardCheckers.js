@@ -13,10 +13,9 @@ function piecesOnBoard() {
 }
 
 
-
-
 // Create chekers board
 function createCheckersBoard() {
+
     // Create background
     background = document.createElement('div');
     document.body.appendChild(background);
@@ -26,7 +25,7 @@ function createCheckersBoard() {
     heading = document.createElement('H1');
     textNode = document.createTextNode("Chechers game");
     heading.appendChild(textNode);
-    background.appendChild(heading);
+    document.body.appendChild(heading);
     heading.classList.add("h1");
 
     // Create white turn/black turn
@@ -36,6 +35,7 @@ function createCheckersBoard() {
     background.appendChild(turnText);
     turnText.classList.add("turn");
 
+    // Create the table
     table = document.createElement('table');
     table.className = "table";
     background.appendChild(table);
@@ -51,6 +51,7 @@ function createCheckersBoard() {
             cell.addEventListener('click', (event) => onCellClick(event, row, col));
         }
 
+        // Show who win
         whoWin = document.createElement('H1');
         textNodeWinnerText = document.createTextNode("w");
         whoWin.appendChild(textNodeWinnerText);
@@ -59,6 +60,7 @@ function createCheckersBoard() {
 
     }
     boardData = new BoardData(piecesOnBoard());
+
 }
 
 // Call the function who crate the board

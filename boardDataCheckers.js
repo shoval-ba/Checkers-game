@@ -13,7 +13,7 @@ class BoardData {
         return false;
     }
 
-    // Set location to the piece(on the click function) and delete the other piece if piece he eat him
+    // Set location to the piece(on the click function) and delete the other piece if the piece capture him
     setLocation(row, col, piece) {
         let isOccupied;
         piece.MoveLocation(row, col);
@@ -62,15 +62,16 @@ class BoardData {
                }
             }
         }
-        if (deletedBlack === 12 || blackCantMove === 12 ) {
+        if (deletedBlack === 3 || blackCantMove === 12 ) {
             winner = WHITE_PLAYER;
         }
-        else if (deletedWhite === 12 || whiteCantMove ===12) {
+        else if (deletedWhite === 3 || whiteCantMove ===12) {
             winner = BLACK_PLAYER;
         }
         return winner
     }
 
+    // Filter the possible moves if some piece can capture
     filterMoveIfCanEat() {
         let possibleMoves;
         whoCanEat = [];
@@ -91,5 +92,6 @@ class BoardData {
             }
         }
     }
+
 
 }

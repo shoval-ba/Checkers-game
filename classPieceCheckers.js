@@ -42,6 +42,14 @@ class Piece {
         this.appendPiece();
     }
 
+    // Create the second background
+    addIcon() {
+        this.icon = document.createElement('div');
+        this.pieceWhite.appendChild(this.icon);
+        this.icon.classList.add("gg-crown");
+    }
+
+
     // Change location of the piece
     changeLocation(row, col) {
         this.row = row;
@@ -170,6 +178,18 @@ class Piece {
             }
         })
         return moves
+    }
+
+    // If piece get to end
+    getToEnd() {
+        if (this.player === WHITE_PLAYER && this.row === 2) {
+            console.log("king")
+            this.addIcon()
+        }
+        if (this.player === BLACK_PLAYER && this.row === 7) {
+            console.log("king")
+            this.addIcon()
+        }
     }
 
 }

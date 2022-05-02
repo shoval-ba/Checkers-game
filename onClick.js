@@ -18,9 +18,6 @@ let canMove;
 
 
 
-
-
-
 // When you click on some piece
 function onCellClick(event, row, col) {
 
@@ -39,6 +36,9 @@ function onCellClick(event, row, col) {
             }
 
             boardData.setLocation(row, col, pieceOld.piece);
+
+            // If some piece get to end
+            pieceOld.piece.getToEnd();
         }
         pieceOld = null;
     }
@@ -116,7 +116,10 @@ function onCellClick(event, row, col) {
             }
         }
     }
-    boardData.win()
+
+    // Show who win
+    boardData.win();
+
     if (winner === WHITE_PLAYER) {
         whoWin.textContent = "The white player won";
         whoWin.classList.remove("out");
@@ -135,6 +138,7 @@ function onCellClick(event, row, col) {
             possibleMoves = null;
         }
     }
+
 }
 
 
