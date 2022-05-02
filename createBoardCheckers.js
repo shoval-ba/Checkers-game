@@ -51,11 +51,11 @@ function createCheckersBoard() {
             cell.addEventListener('click', (event) => onCellClick(event, row, col));
         }
 
-        WhoWin = document.createElement('div');
+        whoWin = document.createElement('H1');
         textNodeWinnerText = document.createTextNode("w");
-        WhoWin.appendChild(textNodeWinnerText);
-        WhoWin.className = "out";
-        table.appendChild(WhoWin);
+        whoWin.appendChild(textNodeWinnerText);
+        whoWin.className = "out";
+        table.appendChild(whoWin);
 
     }
     boardData = new BoardData(piecesOnBoard());

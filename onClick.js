@@ -117,14 +117,22 @@ function onCellClick(event, row, col) {
     }
     boardData.win()
     if (winner === WHITE_PLAYER) {
-        whoWinText.textContent = "The white player won";
+        whoWin.textContent = "The white player won";
         whoWin.classList.remove("out");
         whoWin.classList.add("winner");
+        for (let piece of boardData.pieces){
+            let possibleMoves = piece.possibleMoves();
+            possibleMoves = null ;
+        }
     }
     else if(winner === BLACK_PLAYER){
-        whoWinText.textContent = "The black player won";
+        whoWin.textContent = "The black player won";
         whoWin.classList.remove("out");
         whoWin.classList.add("winner");
+        for (let piece of boardData.pieces){
+            let possibleMoves = piece.possibleMoves();
+            possibleMoves = null;
+        }
     }
 }
 

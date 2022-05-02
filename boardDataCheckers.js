@@ -50,10 +50,10 @@ class BoardData {
     // Check win
     win() {
 
-        if (deletedBlack === 12) {
+        if (deletedBlack === 3) {
             winner = WHITE_PLAYER;
         }
-        else if (deletedWhite === 12) {
+        else if (deletedWhite === 3) {
             winner = BLACK_PLAYER;
         }
         else {
