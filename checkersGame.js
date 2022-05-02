@@ -13,6 +13,7 @@ let lastCol;
 let winner;
 let piecesBlack = 0;
 let piecesWhite = 0;
+let whoCanEat = [];
 
 
 
@@ -32,9 +33,11 @@ class Piece {
     constructor(row, col, player) {
         this.row = row;
         this.col = col;
+        this.CanEat = false;
         this.player = player;
         this.deleted = false;
         this.initializePiece();
+
     }
 
     // Add the pieces to the cell 
@@ -164,7 +167,7 @@ class Piece {
         let moves = [];
         let locationOccupied;
         let isOccupied;
-        let canMove=true;
+        let canMove = true;
 
         let col = this.col;
         let row = this.row;
@@ -212,6 +215,7 @@ function onCellClick(event, row, col) {
     if (pieceOld !== null) {
         let newLocation = event.currentTarget;
         if (newLocation.classList.contains('possible-move')) {
+
             if (pieceOld.piece.player === WHITE_PLAYER) {
                 turnText.textContent = "black turn";
                 turn = BLACK_PLAYER
@@ -238,31 +242,63 @@ function onCellClick(event, row, col) {
     selectedCell = event.currentTarget;
     selectedCell.classList.add('selected');
 
+    boardData.filterMoveIfCanEat();
 
-    // Show possible moves to the black player when it`s turn
+    // Show possible moves to the white player when it`s turn
     for (let piece of boardData.pieces) {
         if (piece.row === row && piece.col === col && !piece.deleted) {
             if (piece.player === WHITE_PLAYER && turn === WHITE_PLAYER) {
-                pieceOld = new state(piece, selectedCell);
-                lastRow = pieceOld.piece.row;
-                lastCol = pieceOld.piece.col;
-                let possibleMoves = piece.possibleMoves();
-                for (let possibleMove of possibleMoves) {
-                    table.rows[possibleMove[0]].cells[possibleMove[1]].classList.add('possible-move');
+                if (whoCanEat.length === 0) {
+                    pieceOld = new state(piece, selectedCell);
+                    lastRow = pieceOld.piece.row;
+                    lastCol = pieceOld.piece.col;
+                    let possibleMoves = piece.possibleMoves();
+                    for (let possibleMove of possibleMoves) {
+                        table.rows[possibleMove[0]].cells[possibleMove[1]].classList.add('possible-move');
+                    }
+                } else {
+                    for (canEat of whoCanEat) {
+                        pieceOld = new state(piece, selectedCell);
+                        if (pieceOld.piece === canEat) {
+                            lastRow = pieceOld.piece.row;
+                            lastCol = pieceOld.piece.col;
+                            let possibleMoves = canEat.possibleMoves();
+                            for (let possibleMove of possibleMoves) {
+                                table.rows[possibleMove[0]].cells[possibleMove[1]].classList.add('possible-move');
+                            }
+                        } else
+                            console.log("cant move")
+                    }
                 }
             }
         }
     }
 
+    // Show possible moves to the black player when it`s turn
     for (let piece of boardData.pieces) {
         if (piece.row === row && piece.col === col && !piece.deleted) {
             if (piece.player === BLACK_PLAYER && turn === BLACK_PLAYER) {
-                pieceOld = new state(piece, selectedCell);
-                lastRow = pieceOld.piece.row;
-                lastCol = pieceOld.piece.col;
-                let possibleMoves = piece.possibleMoves();
-                for (let possibleMove of possibleMoves) {
-                    table.rows[possibleMove[0]].cells[possibleMove[1]].classList.add('possible-move');
+                if (whoCanEat.length === 0) {
+                    pieceOld = new state(piece, selectedCell);
+                    lastRow = pieceOld.piece.row;
+                    lastCol = pieceOld.piece.col;
+                    let possibleMoves = piece.possibleMoves();
+                    for (let possibleMove of possibleMoves) {
+                        table.rows[possibleMove[0]].cells[possibleMove[1]].classList.add('possible-move');
+                    }
+                } else {
+                    for (canEat of whoCanEat) {
+                        pieceOld = new state(piece, selectedCell);
+                        if (pieceOld.piece === canEat) {
+                            lastRow = pieceOld.piece.row;
+                            lastCol = pieceOld.piece.col;
+                            let possibleMoves = canEat.possibleMoves();
+                            for (let possibleMove of possibleMoves) {
+                                table.rows[possibleMove[0]].cells[possibleMove[1]].classList.add('possible-move');
+                            }
+                        } else
+                            console.log("cant move")
+                    }
                 }
             }
         }
