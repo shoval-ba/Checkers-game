@@ -59,8 +59,8 @@ class Piece {
         this.pieceWhite.remove()
         this.pieceBlack.remove()
         this.deleted = true;
-        this.row = -1;
-        this.col = -1;
+        this.row = -10;
+        this.col = -10;
     }
 
     // possible moves of black and white pieces
@@ -96,7 +96,7 @@ class Piece {
         locationOccupied = boardData.getPiece(row + 1, col + 1);
         isOccupied = boardData.getPiece(row + 2, col + 2);
 
-        if (locationOccupied && locationOccupied.player !== this.player && !isOccupied) {
+        if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row + 2, col + 2)) {
             moves.push([row + 2, col + 2]);
             canMove = false
         }
@@ -104,7 +104,7 @@ class Piece {
         locationOccupied = boardData.getPiece(row + 1, col - 1);
         isOccupied = boardData.getPiece(row + 2, col - 2);
 
-        if (locationOccupied && locationOccupied.player !== this.player && !isOccupied) {
+        if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row + 2, col - 2)) {
             moves.push([row + 2, col - 2]);
             canMove = false
         }
@@ -142,7 +142,7 @@ class Piece {
         locationOccupied = boardData.getPiece(row - 1, col + 1);
         isOccupied = boardData.getPiece(row - 2, col + 2);
 
-        if (locationOccupied && locationOccupied.player !== this.player && !isOccupied) {
+        if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row - 2, col + 2)) {
             moves.push([row - 2, col + 2]);
             canMove = false
         }
@@ -150,7 +150,7 @@ class Piece {
         locationOccupied = boardData.getPiece(row - 1, col - 1);
         isOccupied = boardData.getPiece(row - 2, col - 2);
 
-        if (locationOccupied && locationOccupied.player !== this.player && !isOccupied) {
+        if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row - 2, col - 2)) {
             moves.push([row - 2, col - 2]);
             canMove = false
         }

@@ -14,6 +14,7 @@ let winner;
 let deletedBlack = 0;
 let deletedWhite = 0;
 let whoCanEat = [];
+let canMove;
 
 
 
@@ -120,16 +121,16 @@ function onCellClick(event, row, col) {
         whoWin.textContent = "The white player won";
         whoWin.classList.remove("out");
         whoWin.classList.add("winner");
-        for (let piece of boardData.pieces){
+        for (let piece of boardData.pieces) {
             let possibleMoves = piece.possibleMoves();
-            possibleMoves = null ;
+            possibleMoves = null;
         }
     }
-    else if(winner === BLACK_PLAYER){
+    else if (winner === BLACK_PLAYER) {
         whoWin.textContent = "The black player won";
         whoWin.classList.remove("out");
         whoWin.classList.add("winner");
-        for (let piece of boardData.pieces){
+        for (let piece of boardData.pieces) {
             let possibleMoves = piece.possibleMoves();
             possibleMoves = null;
         }

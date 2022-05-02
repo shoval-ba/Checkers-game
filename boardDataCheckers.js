@@ -29,7 +29,6 @@ class BoardData {
                 deletedWhite += 1;
             }
 
-            // console.log("white", piecesWhite)
         }
         if (pieceOld.piece.player === WHITE_PLAYER) {
             isOccupied = this.getPiece(lastRow - 1, lastCol + 1);
@@ -43,23 +42,32 @@ class BoardData {
                 deletedBlack += 1;
             }
 
-            // console.log("black", piecesBlack)
         }
     }
 
     // Check win
     win() {
-
-        if (deletedBlack === 3) {
+        let whiteCantMove = 0;
+        let blackCantMove = 0;
+        let possibleMoves;
+        for (let piece of boardData.pieces) {
+            if (piece.player === turn) {
+                possibleMoves = piece.possibleMoves()
+               if(possibleMoves.length === 0){
+                   if(turn === BLACK_PLAYER){
+                    blackCantMove +=1;
+                   } else if(turn === WHITE_PLAYER){
+                    whiteCantMove +=1;
+                   }
+               }
+            }
+        }
+        if (deletedBlack === 12 || blackCantMove === 12 ) {
             winner = WHITE_PLAYER;
         }
-        else if (deletedWhite === 3) {
+        else if (deletedWhite === 12 || whiteCantMove ===12) {
             winner = BLACK_PLAYER;
         }
-        else {
-            console.log("Unknown");
-        }
-        console.log(winner)
         return winner
     }
 
@@ -73,9 +81,11 @@ class BoardData {
                     if ((piece.row - 2 === possibleMove[0] && piece.col - 2 === possibleMove[1]) || (piece.row - 2 === possibleMove[0] && piece.col + 2 === possibleMove[1])) {
                         whoCanEat.push(piece)
                         piece.CanEat = true;
-                    } else if((piece.row + 2 === possibleMove[0] && piece.col - 2 === possibleMove[1]) || (piece.row + 2 === possibleMove[0] && piece.col + 2 === possibleMove[1])){
+                        canMove = true;
+                    } else if ((piece.row + 2 === possibleMove[0] && piece.col - 2 === possibleMove[1]) || (piece.row + 2 === possibleMove[0] && piece.col + 2 === possibleMove[1])) {
                         whoCanEat.push(piece)
                         piece.CanEat = true;
+                        canMove = true;
                     }
                 }
             }
