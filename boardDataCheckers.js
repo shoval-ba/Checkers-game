@@ -21,12 +21,12 @@ class BoardData {
             isOccupied = this.getPiece(lastRow + 1, lastCol + 1);
             if (isOccupied && row === lastRow + 2 && col === lastCol + 2) {
                 isOccupied.deletePiece()
-                piecesWhite += 1;
+                deletedWhite += 1;
             }
             isOccupied = this.getPiece(lastRow + 1, lastCol - 1);
             if (isOccupied && row === lastRow + 2 && col === lastCol - 2) {
                 isOccupied.deletePiece();
-                piecesWhite += 1;
+                deletedWhite += 1;
             }
 
             // console.log("white", piecesWhite)
@@ -35,16 +35,32 @@ class BoardData {
             isOccupied = this.getPiece(lastRow - 1, lastCol + 1);
             if (isOccupied && row === lastRow - 2 && col === lastCol + 2) {
                 isOccupied.deletePiece();
-                piecesBlack += 1;
+                deletedBlack += 1;
             }
             isOccupied = this.getPiece(lastRow - 1, lastCol - 1);
             if (isOccupied && row === lastRow - 2 && col === lastCol - 2) {
                 isOccupied.deletePiece();
-                piecesBlack += 1;
+                deletedBlack += 1;
             }
 
             // console.log("black", piecesBlack)
         }
+    }
+
+    // Check win
+    win() {
+
+        if (deletedBlack === 12) {
+            winner = WHITE_PLAYER;
+        }
+        else if (deletedWhite === 12) {
+            winner = BLACK_PLAYER;
+        }
+        else {
+            console.log("Unknown");
+        }
+        console.log(winner)
+        return winner
     }
 
     filterMoveIfCanEat() {
