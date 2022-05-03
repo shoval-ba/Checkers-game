@@ -13,7 +13,7 @@ class BoardData {
         return false;
     }
 
-    // Set location to the piece(on the click function) and delete the other piece if the piece capture him
+    // Set location to the piece(on the onClick function) and delete the other piece if the piece captured him
     setLocation(row, col, piece) {
         let isOccupied;
         let isOccupied2;
@@ -26,7 +26,7 @@ class BoardData {
             isOccupied3 = this.getPiece(lastRow + 3, lastCol + 1);
             isOccupied4 = this.getPiece(lastRow + 1, lastCol + 3);
             if (isOccupied && row === lastRow + 2 && col === lastCol + 2) {
-                isOccupied.deletePiece()
+                isOccupied.deletePiece();
                 deletedWhite += 1;
             }
             if (isOccupied2 && row === lastRow + 4 && col === lastCol + 4) {
@@ -54,7 +54,7 @@ class BoardData {
                 deletedWhite += 1;
             }
             if (isOccupied2 && row === lastRow + 4 && col === lastCol - 4) {
-                isOccupied.deletePiece()
+                isOccupied.deletePiece();
                 isOccupied2.deletePiece();
                 deletedWhite += 2;
             }
@@ -104,7 +104,7 @@ class BoardData {
                 deletedBlack += 1;
             }
             if (isOccupied2 && row === lastRow - 4 && col === lastCol - 4) {
-                isOccupied.deletePiece()
+                isOccupied.deletePiece();
                 isOccupied2.deletePiece();
                 deletedBlack += 2;
             }
@@ -122,14 +122,14 @@ class BoardData {
 
     }
 
-    // Check win
+    // Check winning
     win() {
         let whiteCantMove = 0;
         let blackCantMove = 0;
         let possibleMoves;
         for (let piece of boardData.pieces) {
             if (piece.player === turn) {
-                possibleMoves = piece.possibleMoves()
+                possibleMoves = piece.possibleMoves();
                 if (possibleMoves.length === 0) {
                     if (turn === BLACK_PLAYER) {
                         blackCantMove += 1;
@@ -145,10 +145,10 @@ class BoardData {
         else if (deletedWhite === 12 || whiteCantMove === 12) {
             winner = BLACK_PLAYER;
         }
-        return winner
+        return winner;
     }
 
-    // Filter the possible moves if some piece can capture
+    // Block the possible moves if some piece can capture
     filterMoveIfCanEat() {
         let possibleMoves;
         whoCanEat = [];
@@ -157,11 +157,11 @@ class BoardData {
                 possibleMoves = piece.possibleMoves();
                 for (let possibleMove of possibleMoves) {
                     if ((piece.row - 2 === possibleMove[0] && piece.col - 2 === possibleMove[1]) || (piece.row - 2 === possibleMove[0] && piece.col + 2 === possibleMove[1])) {
-                        whoCanEat.push(piece)
+                        whoCanEat.push(piece);
                         piece.CanEat = true;
                         canMove = true;
                     } else if ((piece.row + 2 === possibleMove[0] && piece.col - 2 === possibleMove[1]) || (piece.row + 2 === possibleMove[0] && piece.col + 2 === possibleMove[1])) {
-                        whoCanEat.push(piece)
+                        whoCanEat.push(piece);
                         piece.CanEat = true;
                         canMove = true;
                     }

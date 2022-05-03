@@ -1,41 +1,59 @@
-// Add the pieces
+const BOARD_SIZE = 8;
+const WHITE_PLAYER = 'white';
+const BLACK_PLAYER = 'black';
+
+let pieces = [];
+let table;
+let cell;
+let selectedCell;
+let pieceOld = null;
+let turn = WHITE_PLAYER;
+let lastRow;
+let lastCol;
+let winner;
+let deletedBlack = 0;
+let deletedWhite = 0;
+let whoCanEat = [];
+let canMove;
+
+// Return list of all the pieces on the board.
 function piecesOnBoard() {
     let pieces = [];
     for (i = 0; i < 8; i += 2) {
-        pieces.push(new Piece(0, i, BLACK_PLAYER))
-        pieces.push(new Piece(1, i + 1, BLACK_PLAYER))
-        pieces.push(new Piece(2, i, BLACK_PLAYER))
-        pieces.push(new Piece(5, i + 1, WHITE_PLAYER))
-        pieces.push(new Piece(6, i, WHITE_PLAYER))
-        pieces.push(new Piece(7, i + 1, WHITE_PLAYER))
+        pieces.push(new Piece(0, i, BLACK_PLAYER));
+        pieces.push(new Piece(1, i + 1, BLACK_PLAYER));
+        pieces.push(new Piece(2, i, BLACK_PLAYER));
+        pieces.push(new Piece(5, i + 1, WHITE_PLAYER));
+        pieces.push(new Piece(6, i, WHITE_PLAYER));
+        pieces.push(new Piece(7, i + 1, WHITE_PLAYER));
     }
     return pieces;
 }
 
 
-// Create chekers board
+// Creates checkers board.
 function createCheckersBoard() {
 
-    // Create background
+    // Creates background.
     background = document.createElement('div');
     document.body.appendChild(background);
     background.classList.add("background");
 
-    // Create a title
+    // Creates a title.
     heading = document.createElement('H1');
     textNode = document.createTextNode("Chechers game");
     heading.appendChild(textNode);
     document.body.appendChild(heading);
     heading.classList.add("h1");
 
-    // Create white turn/black turn
+    // Creates white turn/black turn.
     turnText = document.createElement('H1');
     textNodeTurnText = document.createTextNode("white turn");
     turnText.appendChild(textNodeTurnText);
     background.appendChild(turnText);
     turnText.classList.add("turn");
 
-    // Create the table
+    // Creates the table.
     table = document.createElement('table');
     table.className = "table";
     background.appendChild(table);
@@ -51,7 +69,7 @@ function createCheckersBoard() {
             cell.addEventListener('click', (event) => onCellClick(event, row, col));
         }
 
-        // Show who win
+        // Show who won.
         whoWin = document.createElement('H1');
         textNodeWinnerText = document.createTextNode("w");
         whoWin.appendChild(textNodeWinnerText);
@@ -63,5 +81,5 @@ function createCheckersBoard() {
 
 }
 
-// Call the function who crate the board
+// Call the function who creates the board
 window.addEventListener('load', createCheckersBoard);

@@ -1,21 +1,29 @@
+
 class state {
     constructor(piece, cell) {
         this.piece = piece;
         this.cell = cell;
 
     }
-
+    // Returns the cell from the constructor
     getCell() {
         return this.cell
     }
 }
 
+/**
+ * Get row , col on the board.
+ * Get the color of the piece (black/white).
+ * Get two variables that change during the game - 
+ * CanEat - if he has the opportunity to capture .
+ * deleted - if piece was capture or not.
+ */
 class Piece {
     constructor(row, col, player) {
         this.row = row;
         this.col = col;
-        this.CanEat = false;
         this.player = player;
+        this.CanEat = false;
         this.deleted = false;
         this.initializePiece();
 
@@ -23,11 +31,9 @@ class Piece {
 
     // Add the pieces to the cell 
     appendPiece() {
-
         const cell = table.rows[this.row].cells[this.col];
         if (this.player === WHITE_PLAYER) {
             cell.appendChild(this.pieceWhite);
-
         }
         if (this.player === BLACK_PLAYER) {
             cell.appendChild(this.pieceBlack);
@@ -37,37 +43,36 @@ class Piece {
     // Add the pieces
     initializePiece() {
         this.pieceWhite = document.createElement('div');
-        this.pieceWhite.classList.add ("pieceWhite") ;
+        this.pieceWhite.classList.add("pieceWhite");
         this.pieceBlack = document.createElement('div');
         this.pieceBlack.classList.add("pieceBlack");
         this.appendPiece();
     }
 
     // Add icon of crown
-    addIcon(){
+    addIcon() {
         this.icon = document.createElement('div');
-        this.icon.classList.add ("gg-crown") ;
+        this.icon.classList.add("crown");
         if (this.player === WHITE_PLAYER) {
             this.pieceWhite.appendChild(this.icon);
 
         }
         if (this.player === BLACK_PLAYER) {
             this.pieceBlack.appendChild(this.icon);
-
         }
     }
 
-     // If piece get to end
-     getToEnd() {
-        if (this.player === WHITE_PLAYER && this.row === 8) {
-            this.addIcon()
+    // If piece gets to end
+    getToEnd() {
+        if (this.player === WHITE_PLAYER && this.row === 0) {
+            this.addIcon();
         }
         if (this.player === BLACK_PLAYER && this.row === 7) {
-            this.addIcon()
+            this.addIcon();
         }
     }
 
-    // Change location of the piece
+    // Change the location of the piece
     changeLocation(row, col) {
         this.row = row;
         this.col = col;
@@ -81,8 +86,8 @@ class Piece {
 
     // Delete piece from the board
     deletePiece() {
-        this.pieceWhite.remove()
-        this.pieceBlack.remove()
+        this.pieceWhite.remove();
+        this.pieceBlack.remove();
         this.deleted = true;
         this.row = -10;
         this.col = -10;
@@ -99,13 +104,13 @@ class Piece {
             console.log("Unknown type");
         }
 
-        return filteredMoves
+        return filteredMoves;
 
     }
 
     // If the cell exist on the board
     isExist(row, col) {
-        return -1 < row && row < 8 && -1 < col && col < 8
+        return (-1 < row && row < 8 && -1 < col && col < 8);
     }
 
     // Black piece possible moves
@@ -134,7 +139,7 @@ class Piece {
         isOccupied3 = boardData.getPiece(row + 4, col);
 
         locationOccupied4 = boardData.getPiece(row + 1, col + 3);
-        isOccupied4 = boardData.getPiece(row , col + 4);
+        isOccupied4 = boardData.getPiece(row, col + 4);
 
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row + 2, col + 2)) {
             moves.push([row + 2, col + 2]);
@@ -145,7 +150,7 @@ class Piece {
             if (locationOccupied3 && locationOccupied3.player !== this.player && !isOccupied3 && this.isExist(row + 4, col)) {
                 moves.push([row + 4, col]);
             }
-            if (locationOccupied4 && locationOccupied4.player !== this.player && !isOccupied4 && this.isExist(row , col + 4)) {
+            if (locationOccupied4 && locationOccupied4.player !== this.player && !isOccupied4 && this.isExist(row, col + 4)) {
                 moves.push([row, col + 4]);
             }
         }
@@ -160,7 +165,7 @@ class Piece {
         isOccupied3 = boardData.getPiece(row + 4, col);
 
         locationOccupied4 = boardData.getPiece(row + 1, col - 3);
-        isOccupied4 = boardData.getPiece(row , col - 4);
+        isOccupied4 = boardData.getPiece(row, col - 4);
 
 
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row + 2, col - 2)) {
@@ -172,12 +177,12 @@ class Piece {
             if (locationOccupied3 && locationOccupied3.player !== this.player && !isOccupied3 && this.isExist(row + 4, col)) {
                 moves.push([row + 4, col]);
             }
-            if (locationOccupied4 && locationOccupied4.player !== this.player && !isOccupied4 && this.isExist(row , col - 4)) {
+            if (locationOccupied4 && locationOccupied4.player !== this.player && !isOccupied4 && this.isExist(row, col - 4)) {
                 moves.push([row, col - 4]);
             }
         }
 
-        if (!locationOccupied && canMove === true){
+        if (!locationOccupied && canMove === true) {
             moves.push([row + 1, col - 1]);
         }
         locationOccupied = boardData.getPiece(row + 1, col + 1);
@@ -192,7 +197,7 @@ class Piece {
             }
         })
 
-        return moves
+        return moves;
     }
 
     // White piece possible moves
@@ -207,7 +212,6 @@ class Piece {
         let locationOccupied4;
         let isOccupied4;
         let canMove = true;
-
         let col = this.col;
         let row = this.row;
 
@@ -225,7 +229,7 @@ class Piece {
 
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row - 2, col + 2)) {
             moves.push([row - 2, col + 2]);
-            canMove = false
+            canMove = false;
             if (locationOccupied2 && locationOccupied2.player !== this.player && !isOccupied2 && this.isExist(row - 4, col + 4)) {
                 moves.push([row - 4, col + 4]);
             }
@@ -253,7 +257,7 @@ class Piece {
 
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row - 2, col - 2)) {
             moves.push([row - 2, col - 2]);
-            canMove = false
+            canMove = false;
             if (locationOccupied2 && locationOccupied2.player !== this.player && !isOccupied2 && this.isExist(row - 4, col - 4)) {
                 moves.push([row - 4, col - 4]);
             }
@@ -265,7 +269,7 @@ class Piece {
             }
         }
 
-        if (!locationOccupied && canMove === true){
+        if (!locationOccupied && canMove === true) {
             moves.push([row - 1, col - 1]);
         }
 
@@ -282,7 +286,8 @@ class Piece {
                 return true;
             }
         })
-        return moves
+
+        return moves;
     }
 
 }
