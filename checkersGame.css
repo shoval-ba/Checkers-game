@@ -85,7 +85,7 @@
     top:15px;
     left:15px;
     border-radius:50%;
-    border:1px solid white; 
+    border:1px solid rgb(146, 118, 118); 
     border-width:3px;
     border-top-style:inset;
     border-right-style:inset;
@@ -135,8 +135,9 @@
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
     padding-top: 4px;
-    left:80%;
-    top:30.5%;
+    /* left:60%;
+    top:26.5%; */
+    z-index: index 1;
 }
 
 .gg-crown::after,

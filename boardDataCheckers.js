@@ -18,11 +18,13 @@ class BoardData {
         let isOccupied;
         let isOccupied2;
         let isOccupied3;
+        let isOccupied4;
         piece.MoveLocation(row, col);
         if (pieceOld.piece.player === BLACK_PLAYER) {
             isOccupied = this.getPiece(lastRow + 1, lastCol + 1);
             isOccupied2 = this.getPiece(lastRow + 3, lastCol + 3);
             isOccupied3 = this.getPiece(lastRow + 3, lastCol + 1);
+            isOccupied4 = this.getPiece(lastRow + 1, lastCol + 3);
             if (isOccupied && row === lastRow + 2 && col === lastCol + 2) {
                 isOccupied.deletePiece()
                 deletedWhite += 1;
@@ -37,10 +39,16 @@ class BoardData {
                 isOccupied.deletePiece();
                 deletedWhite += 2;
             }
+            if (isOccupied4 && row === lastRow  && col === lastCol + 4) {
+                isOccupied4.deletePiece();
+                isOccupied.deletePiece();
+                deletedWhite += 2;
+            }
 
             isOccupied = this.getPiece(lastRow + 1, lastCol - 1);
             isOccupied2 = this.getPiece(lastRow + 3, lastCol - 3);
             isOccupied3 = this.getPiece(lastRow + 3, lastCol - 1);
+            isOccupied4 = this.getPiece(lastRow + 1, lastCol - 3);
             if (isOccupied && row === lastRow + 2 && col === lastCol - 2) {
                 isOccupied.deletePiece();
                 deletedWhite += 1;
@@ -55,12 +63,18 @@ class BoardData {
                 isOccupied.deletePiece();
                 deletedWhite += 2;
             }
+            if (isOccupied4 && row === lastRow  && col === lastCol - 4) {
+                isOccupied4.deletePiece();
+                isOccupied.deletePiece();
+                deletedWhite += 2;
+            }
 
         }
         if (pieceOld.piece.player === WHITE_PLAYER) {
             isOccupied = this.getPiece(lastRow - 1, lastCol + 1);
             isOccupied2 = this.getPiece(lastRow - 3, lastCol + 3);
             isOccupied3 = this.getPiece(lastRow - 3, lastCol + 1);
+            isOccupied4 = this.getPiece(lastRow - 1, lastCol + 3);
             if (isOccupied && row === lastRow - 2 && col === lastCol + 2) {
                 isOccupied.deletePiece();
                 deletedBlack += 1;
@@ -75,10 +89,16 @@ class BoardData {
                 isOccupied.deletePiece();
                 deletedBlack += 2;
             }
+            if (isOccupied4 && row === lastRow  && col === lastCol + 4) {
+                isOccupied4.deletePiece();
+                isOccupied.deletePiece();
+                deletedBlack += 2;
+            }
 
             isOccupied = this.getPiece(lastRow - 1, lastCol - 1);
             isOccupied2 = this.getPiece(lastRow - 3, lastCol - 3);
             isOccupied3 = this.getPiece(lastRow - 3, lastCol - 1);
+            isOccupied4 = this.getPiece(lastRow - 1, lastCol - 3);
             if (isOccupied && row === lastRow - 2 && col === lastCol - 2) {
                 isOccupied.deletePiece();
                 deletedBlack += 1;
@@ -93,9 +113,12 @@ class BoardData {
                 isOccupied.deletePiece();
                 deletedBlack += 2;
             }
+            if (isOccupied4 && row === lastRow  && col === lastCol - 4) {
+                isOccupied4.deletePiece();
+                isOccupied.deletePiece();
+                deletedBlack += 2;
+            }
         }
-        console.log("black" ,deletedBlack)
-        console.log("white" ,deletedWhite)
 
     }
 

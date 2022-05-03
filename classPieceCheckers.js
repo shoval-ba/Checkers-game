@@ -101,6 +101,8 @@ class Piece {
         let isOccupied2;
         let locationOccupied3;
         let isOccupied3;
+        let locationOccupied4;
+        let isOccupied4;
         let canMove = true;
 
         let col = this.col;
@@ -115,6 +117,9 @@ class Piece {
         locationOccupied3 = boardData.getPiece(row + 3, col + 1);
         isOccupied3 = boardData.getPiece(row + 4, col);
 
+        locationOccupied4 = boardData.getPiece(row + 1, col + 3);
+        isOccupied4 = boardData.getPiece(row , col + 4);
+
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row + 2, col + 2)) {
             moves.push([row + 2, col + 2]);
             canMove = false
@@ -124,12 +129,10 @@ class Piece {
             if (locationOccupied3 && locationOccupied3.player !== this.player && !isOccupied3 && this.isExist(row + 4, col)) {
                 moves.push([row + 4, col]);
             }
+            if (locationOccupied4 && locationOccupied4.player !== this.player && !isOccupied4 && this.isExist(row , col + 4)) {
+                moves.push([row, col + 4]);
+            }
         }
-
-        if (!locationOccupied && canMove === true) {
-            moves.push([row + 1, col + 1]);
-        }
-
 
         locationOccupied = boardData.getPiece(row + 1, col - 1);
         isOccupied = boardData.getPiece(row + 2, col - 2);
@@ -140,6 +143,10 @@ class Piece {
         locationOccupied3 = boardData.getPiece(row + 3, col - 1);
         isOccupied3 = boardData.getPiece(row + 4, col);
 
+        locationOccupied4 = boardData.getPiece(row + 1, col - 3);
+        isOccupied4 = boardData.getPiece(row , col - 4);
+
+
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row + 2, col - 2)) {
             moves.push([row + 2, col - 2]);
             canMove = false
@@ -149,10 +156,18 @@ class Piece {
             if (locationOccupied3 && locationOccupied3.player !== this.player && !isOccupied3 && this.isExist(row + 4, col)) {
                 moves.push([row + 4, col]);
             }
+            if (locationOccupied4 && locationOccupied4.player !== this.player && !isOccupied4 && this.isExist(row , col - 4)) {
+                moves.push([row, col - 4]);
+            }
         }
 
-        if (!locationOccupied && canMove === true)
+        if (!locationOccupied && canMove === true){
             moves.push([row + 1, col - 1]);
+        }
+        locationOccupied = boardData.getPiece(row + 1, col + 1);
+        if (!locationOccupied && canMove === true) {
+            moves.push([row + 1, col + 1]);
+        }
 
 
         moves = moves.filter((move) => {
@@ -173,6 +188,8 @@ class Piece {
         let isOccupied2;
         let locationOccupied3;
         let isOccupied3;
+        let locationOccupied4;
+        let isOccupied4;
         let canMove = true;
 
         let col = this.col;
@@ -187,6 +204,9 @@ class Piece {
         locationOccupied3 = boardData.getPiece(row - 3, col + 1);
         isOccupied3 = boardData.getPiece(row - 4, col);
 
+        locationOccupied4 = boardData.getPiece(row - 1, col + 3);
+        isOccupied4 = boardData.getPiece(row, col + 4);
+
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row - 2, col + 2)) {
             moves.push([row - 2, col + 2]);
             canMove = false
@@ -196,11 +216,10 @@ class Piece {
             if (locationOccupied3 && locationOccupied3.player !== this.player && !isOccupied3 && this.isExist(row - 4, col)) {
                 moves.push([row - 4, col]);
             }
+            if (locationOccupied4 && locationOccupied4.player !== this.player && !isOccupied4 && this.isExist(row, col + 4)) {
+                moves.push([row, col + 4]);
+            }
 
-        }
-
-        if (!locationOccupied && canMove === true) {
-            moves.push([row - 1, col + 1]);
         }
 
         locationOccupied = boardData.getPiece(row - 1, col - 1);
@@ -212,6 +231,10 @@ class Piece {
         locationOccupied3 = boardData.getPiece(row - 3, col - 1);
         isOccupied3 = boardData.getPiece(row - 4, col);
 
+        locationOccupied4 = boardData.getPiece(row - 1, col - 3);
+        isOccupied4 = boardData.getPiece(row, col - 4);
+
+
         if (locationOccupied && locationOccupied.player !== this.player && !isOccupied && this.isExist(row - 2, col - 2)) {
             moves.push([row - 2, col - 2]);
             canMove = false
@@ -221,10 +244,19 @@ class Piece {
             if (locationOccupied3 && locationOccupied3.player !== this.player && !isOccupied3 && this.isExist(row - 4, col)) {
                 moves.push([row - 4, col]);
             }
+            if (locationOccupied4 && locationOccupied4.player !== this.player && !isOccupied4 && this.isExist(row, col - 4)) {
+                moves.push([row, col - 4]);
+            }
         }
 
-        if (!locationOccupied && canMove === true)
+        if (!locationOccupied && canMove === true){
             moves.push([row - 1, col - 1]);
+        }
+
+        locationOccupied = boardData.getPiece(row - 1, col + 1);
+        if (!locationOccupied && canMove === true) {
+            moves.push([row - 1, col + 1]);
+        }
 
         locationOccupied = boardData.getPiece(row - 1, col + 1);
         isOccupied = boardData.getPiece(row - 2, col + 2);
