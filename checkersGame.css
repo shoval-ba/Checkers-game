@@ -63,22 +63,21 @@
     background-color: rgb(63, 68, 67);
     border-radius: 50%;
     display: inline-block;
-    top:30%;
-    left:50%;
     margin-left: 20%;
     margin-top: 4.5%;
+    align-items: center;
 }
 
 .pieceWhite{
+    position: relative;
     height: 60px;
     width: 60px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
-    top:30%;
-    left:50%;
     margin-left: 20%;
     margin-top: 4.5%;
+    align-items: center;
 }
 
 .bar { 
@@ -128,16 +127,15 @@
     position: absolute;
     display: block;
     transform: scale(var(--ggs,1));
-    width: 19px;
-    height: 12px;
+    width: 26px;
+    height: 19px;
     border: 2px solid;
     border-top-color: transparent;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
-    padding-top: 4px;
-    /* left:60%;
-    top:26.5%; */
-    z-index: index 1;
+    padding-top: 8px;
+    top:35.5%;
+    left:30%;
 }
 
 .gg-crown::after,
@@ -146,8 +144,8 @@
     display: block;
     position: absolute;
     box-sizing: border-box;
-    width: 8px;
-    height: 8px;
+    width: 11.6px;
+    height: 9px;
     border-bottom: 2px solid;
     border-left: 2px solid;
     transform: rotate(-45deg);

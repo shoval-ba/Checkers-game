@@ -37,19 +37,35 @@ class Piece {
     // Add the pieces
     initializePiece() {
         this.pieceWhite = document.createElement('div');
-        this.pieceWhite.className = "pieceWhite";
+        this.pieceWhite.classList.add ("pieceWhite") ;
         this.pieceBlack = document.createElement('div');
-        this.pieceBlack.className = "pieceBlack";
+        this.pieceBlack.classList.add("pieceBlack");
         this.appendPiece();
     }
 
-    // Create the second background
-    addIcon() {
+    // Add icon of crown
+    addIcon(){
         this.icon = document.createElement('div');
-        this.pieceWhite.appendChild(this.icon);
-        this.icon.classList.add("gg-crown");
+        this.icon.classList.add ("gg-crown") ;
+        if (this.player === WHITE_PLAYER) {
+            this.pieceWhite.appendChild(this.icon);
+
+        }
+        if (this.player === BLACK_PLAYER) {
+            this.pieceBlack.appendChild(this.icon);
+
+        }
     }
 
+     // If piece get to end
+     getToEnd() {
+        if (this.player === WHITE_PLAYER && this.row === 8) {
+            this.addIcon()
+        }
+        if (this.player === BLACK_PLAYER && this.row === 7) {
+            this.addIcon()
+        }
+    }
 
     // Change location of the piece
     changeLocation(row, col) {
@@ -267,18 +283,6 @@ class Piece {
             }
         })
         return moves
-    }
-
-    // If piece get to end
-    getToEnd() {
-        if (this.player === WHITE_PLAYER && this.row === 0) {
-            console.log("king")
-
-        }
-        if (this.player === BLACK_PLAYER && this.row === 7) {
-            console.log("king")
-
-        }
     }
 
 }
