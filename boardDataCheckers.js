@@ -13,7 +13,7 @@ class BoardData {
         return false;
     }
 
-    // Set location to the piece(on the onClick function) and delete the other piece if the piece captured him
+    // Set location to the piece(on the onClick function) and delete the other piece if the piece captured him.
     setLocation(row, col, piece) {
         let isOccupied;
         let isOccupied2;
@@ -122,7 +122,7 @@ class BoardData {
 
     }
 
-    // Check winning
+    // Check winning.
     win() {
         let whiteCantMove = 0;
         let blackCantMove = 0;
@@ -148,7 +148,7 @@ class BoardData {
         return winner;
     }
 
-    // Block the possible moves if some piece can capture
+    // Block the possible moves if some piece can capture.
     filterMoveIfCanEat() {
         let possibleMoves;
         whoCanEat = [];

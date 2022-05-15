@@ -71,7 +71,7 @@ function createCheckersBoard() {
 
         // Show who won.
         whoWin = document.createElement('H1');
-        textNodeWinnerText = document.createTextNode("w");
+        textNodeWinnerText = document.createTextNode("");
         whoWin.appendChild(textNodeWinnerText);
         whoWin.className = "out";
         table.appendChild(whoWin);

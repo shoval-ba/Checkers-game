@@ -29,7 +29,7 @@ class Piece {
 
     }
 
-    // Add the pieces to the cell 
+    // Add the pieces to the cell.
     appendPiece() {
         const cell = table.rows[this.row].cells[this.col];
         if (this.player === WHITE_PLAYER) {
@@ -40,7 +40,7 @@ class Piece {
         }
     }
 
-    // Add the pieces
+    // Add the pieces.
     initializePiece() {
         this.pieceWhite = document.createElement('div');
         this.pieceWhite.classList.add("pieceWhite");
@@ -49,7 +49,7 @@ class Piece {
         this.appendPiece();
     }
 
-    // Add icon of crown
+    // Add icon of crown.
     addIcon() {
         this.icon = document.createElement('div');
         this.icon.classList.add("crown");
@@ -62,7 +62,7 @@ class Piece {
         }
     }
 
-    // If piece gets to end
+    // If piece gets to the end of the board.
     getToEnd() {
         if (this.player === WHITE_PLAYER && this.row === 0) {
             this.addIcon();
@@ -72,19 +72,19 @@ class Piece {
         }
     }
 
-    // Change the location of the piece
+    // Change the location of the piece.
     changeLocation(row, col) {
         this.row = row;
         this.col = col;
     }
 
-    // Change the loction and the image of the piece
+    // Change the loction and the image of the piece.
     MoveLocation(row, col) {
         this.changeLocation(row, col);
         this.appendPiece();
     }
 
-    // Delete piece from the board
+    // Delete piece from the board.
     deletePiece() {
         this.pieceWhite.remove();
         this.pieceBlack.remove();
@@ -93,7 +93,7 @@ class Piece {
         this.col = -10;
     }
 
-    // possible moves of black and white pieces
+    // possible moves of black and white pieces.
     possibleMoves() {
         let filteredMoves = [];
         if (this.player === BLACK_PLAYER) {
@@ -108,12 +108,12 @@ class Piece {
 
     }
 
-    // If the cell exist on the board
+    // If the cell exist on the board.
     isExist(row, col) {
         return (-1 < row && row < 8 && -1 < col && col < 8);
     }
 
-    // Black piece possible moves
+    // Black piece possible moves.
     blackMoves() {
         let moves = [];
         let locationOccupied;
@@ -200,7 +200,7 @@ class Piece {
         return moves;
     }
 
-    // White piece possible moves
+    // White piece possible moves.
     whiteMoves() {
         let moves = [];
         let locationOccupied;
