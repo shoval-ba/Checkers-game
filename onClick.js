@@ -40,30 +40,30 @@ function onCellClick(event, row, col) {
 
     // Show possible moves to the player when it`s turn.
     for (let piece of boardData.pieces) {
+        if (piece.player !== turn) continue;
         if (piece.row === row && piece.col === col && !piece.deleted) {
-            if (piece.player === turn ) {
-                if (whoCanEat.length === 0) {
+            if (whoCanEat.length === 0) {
+                pieceOld = new state(piece, selectedCell);
+                lastRow = pieceOld.piece.row;
+                lastCol = pieceOld.piece.col;
+                let possibleMoves = piece.possibleMoves();
+                for (let possibleMove of possibleMoves) {
+                    table.rows[possibleMove[0]].cells[possibleMove[1]].classList.add('possible-move');
+                }
+            } else {
+                for (canEat of whoCanEat) {
                     pieceOld = new state(piece, selectedCell);
-                    lastRow = pieceOld.piece.row;
-                    lastCol = pieceOld.piece.col;
-                    let possibleMoves = piece.possibleMoves();
-                    for (let possibleMove of possibleMoves) {
-                        table.rows[possibleMove[0]].cells[possibleMove[1]].classList.add('possible-move');
-                    }
-                } else {
-                    for (canEat of whoCanEat) {
-                        pieceOld = new state(piece, selectedCell);
-                        if (pieceOld.piece === canEat) {
-                            lastRow = pieceOld.piece.row;
-                            lastCol = pieceOld.piece.col;
-                            let possibleMoves = canEat.possibleMoves();
-                            for (let possibleMove of possibleMoves) {
-                                table.rows[possibleMove[0]].cells[possibleMove[1]].classList.add('possible-move');
-                            }
+                    if (pieceOld.piece === canEat) {
+                        lastRow = pieceOld.piece.row;
+                        lastCol = pieceOld.piece.col;
+                        let possibleMoves = canEat.possibleMoves();
+                        for (let possibleMove of possibleMoves) {
+                            table.rows[possibleMove[0]].cells[possibleMove[1]].classList.add('possible-move');
                         }
                     }
                 }
             }
+
         }
     }
 
@@ -76,8 +76,8 @@ function onCellClick(event, row, col) {
         whoWin.classList.remove("out");
         whoWin.classList.add("winner");
         for (let piece of boardData.pieces) {
-            let possibleMoves =piece.possibleMoves();
-            possibleMoves =[];
+            let possibleMoves = piece.possibleMoves();
+            possibleMoves = [];
         }
     }
     else if (winner === BLACK_PLAYER) {
@@ -85,7 +85,7 @@ function onCellClick(event, row, col) {
         whoWin.classList.remove("out");
         whoWin.classList.add("winner");
         for (let piece of boardData.pieces) {
-            let possibleMoves =piece.possibleMoves();
+            let possibleMoves = piece.possibleMoves();
             possibleMoves = [];
         }
     }

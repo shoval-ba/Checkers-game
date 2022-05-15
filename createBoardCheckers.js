@@ -41,7 +41,7 @@ function createCheckersBoard() {
 
     // Creates a title.
     heading = document.createElement('H1');
-    textNode = document.createTextNode("Chechers game");
+    textNode = document.createTextNode("Checkers game");
     heading.appendChild(textNode);
     document.body.appendChild(heading);
     heading.classList.add("h1");
