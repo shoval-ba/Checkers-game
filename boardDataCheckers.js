@@ -39,7 +39,7 @@ class BoardData {
                 isOccupied.deletePiece();
                 deletedWhite += 2;
             }
-            if (isOccupied4 && row === lastRow  && col === lastCol + 4) {
+            if (isOccupied4 && row === lastRow && col === lastCol + 4) {
                 isOccupied4.deletePiece();
                 isOccupied.deletePiece();
                 deletedWhite += 2;
@@ -63,7 +63,7 @@ class BoardData {
                 isOccupied.deletePiece();
                 deletedWhite += 2;
             }
-            if (isOccupied4 && row === lastRow  && col === lastCol - 4) {
+            if (isOccupied4 && row === lastRow && col === lastCol - 4) {
                 isOccupied4.deletePiece();
                 isOccupied.deletePiece();
                 deletedWhite += 2;
@@ -89,7 +89,7 @@ class BoardData {
                 isOccupied.deletePiece();
                 deletedBlack += 2;
             }
-            if (isOccupied4 && row === lastRow  && col === lastCol + 4) {
+            if (isOccupied4 && row === lastRow && col === lastCol + 4) {
                 isOccupied4.deletePiece();
                 isOccupied.deletePiece();
                 deletedBlack += 2;
@@ -113,7 +113,7 @@ class BoardData {
                 isOccupied.deletePiece();
                 deletedBlack += 2;
             }
-            if (isOccupied4 && row === lastRow  && col === lastCol - 4) {
+            if (isOccupied4 && row === lastRow && col === lastCol - 4) {
                 isOccupied4.deletePiece();
                 isOccupied.deletePiece();
                 deletedBlack += 2;
@@ -168,6 +168,7 @@ class BoardData {
                 }
             }
         }
+        // console.log()
     }
 
 
