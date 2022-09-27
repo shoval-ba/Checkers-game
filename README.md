@@ -9,6 +9,6 @@ In the beggining, I build the board with the players, after that I wrote classes
 
 During this project I learn a lot, beacuse I have limit time to do this project so I needed to prefer what to do first and also I did this project all alone, only after a month of learning.
 
-This is the link[https://drive.google.com/drive/folders/18JCrA_HCgDje81NQzRZvLY56nPYidlhl?usp=sharing] to my video explanation of the checkers project.
+This is the [link](https://drive.google.com/drive/folders/18JCrA_HCgDje81NQzRZvLY56nPYidlhl?usp=sharing) to my video explanation of the checkers project.
 Have fun :smiley:
 
