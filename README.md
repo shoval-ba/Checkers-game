@@ -1,13 +1,13 @@
 # Checkers-game
 
-Beacuse my course was "Sort course", after a month of the course, they give us to do a checkers-game as a project to decide who contine the course and who not.
+Since my course was a "Sort course", after a month in the course, we needed to build a checkers-game as a project to decide who continue the course and who isn’t.
 
-In the Pre-course we started 80 students and after the sorts we were 40 students.
+We started with 80 students in the Pre-course and after the sorts there were only we 40 students remain.
 
-They give us 3 days to done this project, and I did it.
-In the beggining, I build the board with the players, after that I wrote classes to the player, for any player there is color, possible moves(like if he can eat other player) and turn. After press on some player it's shows you the possible moves of the player, if he can eat, or if it is turn or not. 
+They gave us 3 days to complete this project. At the beginning, I build the board with the players, after that I wrote classes to the player, for every player there is a color, possible moves (like if he can eat other player) and turn. After the user press on a player it's shows him the possible moves of the player, if it can eat, or if it can turn or not.
 
-During this project I learn a lot, beacuse I have limit time to do this project so I needed to prefer what to do first and also I did this project all alone, only after a month of learning.
+During this project I have learned a lot, since I had limited time to do it, I needed to prioritize what to do first and additionally I did this project alone, only after a month of learning.
+
 
 This is the [link](https://drive.google.com/drive/folders/18JCrA_HCgDje81NQzRZvLY56nPYidlhl?usp=sharing) to my video explanation of the checkers project.
 Have fun :smiley:
